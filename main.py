@@ -36,8 +36,10 @@ def main():
 
     # State updates.
     updatable.update(dt)
-    # for u in updatable:
-    #   u.update(dt)
+    for obj in asteroids:
+      if obj.collision(player):
+        print("Game over!")
+        return
 
     # Draw calls.
     # Order of calls is important! Drawing the player before filling the screen
