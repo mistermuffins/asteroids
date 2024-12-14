@@ -15,6 +15,11 @@ def main():
   screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
   clock = pygame.time.Clock()
   dt = 0
+
+  updatable = pygame.sprite.Group()
+  drawable = pygame.sprite.Group()
+  Player.containers = (updatable, drawable)
+
   player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
   while True:
@@ -23,13 +28,18 @@ def main():
         return
 
     # State updates.
-    player.update(dt)
+    updatable.update(dt)
+    # for u in updatable:
+    #   u.update(dt)
 
     # Draw calls.
     # Order of calls is important! Drawing the player before filling the screen
     # will just end up with a black screen.
     screen.fill(BLACK)
-    player.draw(screen)
+    # Unable to use this API atm, sprite requires .image attribute
+    # drawable.draw(screen)
+    for d in drawable:
+      d.draw(screen)
 
     # Update and tick.
     pygame.display.flip()
