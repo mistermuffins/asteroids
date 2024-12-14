@@ -22,12 +22,18 @@ def main():
       if event.type == pygame.QUIT:
         return
 
+    # State updates.
+    player.update(dt)
+
+    # Draw calls.
     # Order of calls is important! Drawing the player before filling the screen
     # will just end up with a black screen.
     screen.fill(BLACK)
     player.draw(screen)
 
+    # Update and tick.
     pygame.display.flip()
+    # Limit to 60 FPS.
     dt = clock.tick(60) / 1000
 
 
